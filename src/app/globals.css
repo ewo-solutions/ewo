@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1b1a33;
+  --color-ink-secondary: #2b2a50;
+  --color-lilac: #c3b6f0;
+  --color-lime: #c5f122;
+  --color-green: #00d17f;
+  --color-violet: #5a4fcf;
+
+  --radius-panel: 40px;
+  --radius-card: 30px;
+  --radius-mask: 70px;
+  --radius-frame: 20px;
+  --radius-folder: 16px;
+  --radius-nav: 12px;
+
+  --font-sans: var(--font-space-grotesk), sans-serif;
+
+  --animate-spin-slow: spin-slow 40s linear infinite;
+  --animate-word-in: word-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  background: #fff;
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+@layer components {
+  /* Fixed hover targets for pill buttons — resting colors vary per instance,
+     hover always inverts to lime-on-ink or ink-on-lime (see PillButton). */
+  .pill-a:hover {
+    background-color: var(--color-lime) !important;
+    color: var(--color-ink) !important;
+    border-color: var(--color-lime) !important;
+  }
+  .pill-a:hover .pill-circle {
+    background-color: var(--color-ink) !important;
+    color: var(--color-lime) !important;
+    transform: rotate(45deg);
+  }
+  .pill-b:hover {
+    background-color: var(--color-ink) !important;
+    color: var(--color-lime) !important;
+    border-color: var(--color-ink) !important;
+  }
+  .pill-b:hover .pill-circle {
+    background-color: var(--color-lime) !important;
+    color: var(--color-ink) !important;
+    transform: rotate(45deg);
+  }
+}
