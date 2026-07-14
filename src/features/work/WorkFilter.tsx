@@ -33,7 +33,7 @@ export default function WorkFilter() {
       </section>
 
       <section className="mx-auto max-w-[1426px] px-9 pb-[110px]">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] gap-7">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,480px),1fr))] gap-7">
           {cases.map((c) => (
             <article
               key={c.client}
