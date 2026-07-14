@@ -13,12 +13,11 @@ export default function Preloader() {
   const [phase, setPhase] = useState<"in" | "exit" | "gone">("in");
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setPhase("gone");
-      return;
-    }
-    const exit = setTimeout(() => setPhase("exit"), EXIT_MS);
-    const remove = setTimeout(() => setPhase("gone"), REMOVE_MS);
+    // Under reduced motion the overlay is already display:none via CSS;
+    // unmount it immediately instead of playing the timeline.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const exit = setTimeout(() => setPhase("exit"), reduce ? 0 : EXIT_MS);
+    const remove = setTimeout(() => setPhase("gone"), reduce ? 0 : REMOVE_MS);
     return () => {
       clearTimeout(exit);
       clearTimeout(remove);
