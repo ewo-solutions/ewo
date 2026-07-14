@@ -45,7 +45,7 @@ export default function ServiceAccordion() {
                       {s.desc}
                     </p>
                     <PillButton href={`/services/${s.slug}`} rest="dark" hover="lime" size="sm">
-                      Learn more
+                      Explore this service
                     </PillButton>
                   </div>
                 ) : (

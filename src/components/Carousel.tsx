@@ -23,13 +23,15 @@ export default function Carousel({
   const [index, setIndex] = useState(0);
   const paused = useRef(false);
 
+  // Scroll the track only — never scrollIntoView, which also scrolls the
+  // page vertically and yanks the visitor down to the carousel.
   const goTo = (i: number) => {
     const el = track.current;
     if (!el) return;
     const child = el.children[((i % items.length) + items.length) % items.length] as
       | HTMLElement
       | undefined;
-    child?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    if (child) el.scrollTo({ left: child.offsetLeft, behavior: "smooth" });
   };
 
   // Track which card is closest to the left edge for the dots.
@@ -64,14 +66,10 @@ export default function Carousel({
       if (atEnd) {
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        const next = Array.from(el.children).findIndex(
+        const next = Array.from(el.children).find(
           (c) => (c as HTMLElement).offsetLeft > el.scrollLeft + 8,
-        );
-        (el.children[next === -1 ? 0 : next] as HTMLElement)?.scrollIntoView({
-          behavior: "smooth",
-          inline: "start",
-          block: "nearest",
-        });
+        ) as HTMLElement | undefined;
+        el.scrollTo({ left: next ? next.offsetLeft : 0, behavior: "smooth" });
       }
     }, autoMs);
     return () => clearInterval(t);
