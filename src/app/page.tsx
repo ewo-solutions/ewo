@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import CountUp from "@/components/CountUp";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
@@ -104,7 +105,7 @@ export default function HomePage() {
               {stats.map(({ value, label }) => (
                 <div key={label} className="flex items-baseline gap-7">
                   <span className="min-w-[220px] text-[clamp(60px,6vw,96px)] font-bold leading-none text-lilac">
-                    {value}
+                    <CountUp value={value} />
                   </span>
                   <span className="border-b-2 border-lime pb-1.5 text-base font-medium">
                     {label}

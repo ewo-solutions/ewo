@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CountUp from "@/components/CountUp";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -81,7 +82,7 @@ export default function AboutPage() {
           {aboutStats.map(({ value, label }) => (
             <div key={label}>
               <div className="text-[clamp(70px,7vw,110px)] font-bold leading-none text-lilac">
-                {value}
+                <CountUp value={value} />
               </div>
               <div className="mt-3 text-base font-semibold">{label}</div>
             </div>

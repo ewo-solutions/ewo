@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import CountUp from "@/components/CountUp";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import { caseStudies, workFilters, type WorkFilterLabel } from "@/data/work";
 
@@ -67,7 +68,9 @@ export default function WorkFilter() {
                     [c.stat2, c.stat2label],
                   ].map(([stat, label]) => (
                     <div key={label}>
-                      <strong className="text-2xl text-white">{stat}</strong>
+                      <strong className="text-2xl text-white">
+                        <CountUp value={stat} />
+                      </strong>
                       <span className="block text-[12.5px] text-white/80">{label}</span>
                     </div>
                   ))}
