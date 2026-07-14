@@ -74,7 +74,10 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1426px] px-9 pb-[110px]">
         <Divider className="mb-[90px]" />
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-12 text-center">
+        <div
+          className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-12 text-center"
+          data-stagger
+        >
           {aboutStats.map(({ value, label }) => (
             <div key={label}>
               <div className="text-[clamp(70px,7vw,110px)] font-bold leading-none text-lilac">
@@ -110,7 +113,10 @@ export default function AboutPage() {
             <p className="text-[15.5px] leading-[1.7] text-white/70">{teamPanel.col1}</p>
             <p className="text-[15.5px] leading-[1.7] text-white/70">{teamPanel.col2}</p>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-6">
+          <div
+            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-6"
+            data-stagger
+          >
             {team.map(({ name, role }) => (
               <div
                 key={name}

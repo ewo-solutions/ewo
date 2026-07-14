@@ -40,14 +40,16 @@ export default function ProcessStepper() {
             ))}
           </div>
         </div>
-        <Image
-          src="/images/process-photo.jpg"
-          alt="Our process"
-          width={1400}
-          height={1400}
-          className="aspect-[2/3] w-full rounded-card object-cover"
-          sizes="(max-width: 1024px) 100vw, 640px"
-        />
+        <div className="aspect-[2/3] w-full overflow-hidden rounded-card">
+          <Image
+            src="/images/process-photo.jpg"
+            alt="Our process"
+            width={1400}
+            height={1400}
+            className="parallax-img size-full object-cover"
+            sizes="(max-width: 1024px) 100vw, 640px"
+          />
+        </div>
       </div>
     </section>
   );

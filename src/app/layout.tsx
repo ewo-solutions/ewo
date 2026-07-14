@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import Nav from "@/components/Nav";
+import PageTransition from "@/components/PageTransition";
 import Preloader from "@/components/Preloader";
 import "./globals.css";
 
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className={spaceGrotesk.variable}>
       <body className="font-sans antialiased">
         <Preloader />
+        <PageTransition />
         <Nav />
         {children}
       </body>

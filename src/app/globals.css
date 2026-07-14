@@ -91,6 +91,91 @@
   transform: none;
 }
 
+/* Curtain page transition (see PageTransition.tsx) */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+}
+
+.page-curtain span {
+  position: absolute;
+  inset: 0;
+  transform: translateY(101%);
+}
+
+.curtain-lime {
+  background: var(--color-lime);
+}
+
+.curtain-ink {
+  background: var(--color-ink);
+}
+
+.page-curtain.covering .curtain-lime {
+  animation: curtain-up 0.44s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-curtain.covering .curtain-ink {
+  animation: curtain-up 0.44s cubic-bezier(0.76, 0, 0.24, 1) 0.1s forwards;
+}
+
+.page-curtain.revealing span {
+  transform: translateY(0);
+}
+
+.page-curtain.revealing .curtain-ink {
+  animation: curtain-off 0.55s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-curtain.revealing .curtain-lime {
+  animation: curtain-off 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.1s forwards;
+}
+
+@keyframes curtain-up {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes curtain-off {
+  to {
+    transform: translateY(-101%);
+  }
+}
+
+/* Marquee strip */
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Scroll-driven photo parallax where the browser supports it; static image
+   elsewhere and under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .parallax-img {
+      animation: parallax linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translateY(5%) scale(1.12);
+  }
+  to {
+    transform: translateY(-5%) scale(1.12);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .preloader {
     display: none;
@@ -99,6 +184,9 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .marquee-track {
+    animation: none;
   }
 }
 

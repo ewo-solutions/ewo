@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
+import Marquee from "@/components/Marquee";
 import Newsletter from "@/components/Newsletter";
 import PillButton from "@/components/PillButton";
 import RotatingTextBadge from "@/components/RotatingTextBadge";
@@ -40,6 +41,17 @@ export default function HomePage() {
           </p>
         </div>
       </header>
+
+      <Marquee
+        items={[
+          "strategy",
+          "design",
+          "development",
+          "content",
+          "advertising",
+          "social media",
+        ]}
+      />
 
       {/* PHILOSOPHY PANEL */}
       <section className="mx-auto max-w-[1848px] px-9">
@@ -88,7 +100,7 @@ export default function HomePage() {
             <p className="mb-14 max-w-[420px] text-[16.5px] leading-[1.65] text-ink/75">
               {whatWeDo.body}
             </p>
-            <div className="flex flex-col gap-11">
+            <div className="flex flex-col gap-11" data-stagger>
               {stats.map(({ value, label }) => (
                 <div key={label} className="flex items-baseline gap-7">
                   <span className="min-w-[220px] text-[clamp(60px,6vw,96px)] font-bold leading-none text-lilac">
@@ -101,14 +113,16 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <Image
-            src="/images/brand-photo.jpg"
-            alt="EWO team at work"
-            width={2400}
-            height={1600}
-            className="aspect-[9/10] w-full rounded-mask object-cover"
-            sizes="(max-width: 1024px) 100vw, 640px"
-          />
+          <div className="aspect-[9/10] w-full overflow-hidden rounded-mask">
+            <Image
+              src="/images/brand-photo.jpg"
+              alt="EWO team at work"
+              width={2400}
+              height={1600}
+              className="parallax-img size-full object-cover"
+              sizes="(max-width: 1024px) 100vw, 640px"
+            />
+          </div>
         </div>
       </section>
 
@@ -155,7 +169,10 @@ export default function HomePage() {
               </PillButton>
             </div>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
+          <div
+            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6"
+            data-stagger
+          >
             {caseStudiesPanel.tiles.map((tile) => (
               <Link
                 key={tile}
@@ -174,7 +191,10 @@ export default function HomePage() {
       {/* TESTIMONIALS */}
       <section className="mx-auto max-w-[1426px] px-9 pb-[130px]">
         <Divider className="mb-[72px]" />
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] gap-20">
+        <div
+          className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] gap-20"
+          data-stagger
+        >
           {reviews.map(({ quote, name, role }) => (
             <figure key={name} className="m-0">
               <blockquote className="mb-7 text-[17px] leading-[1.7] text-ink/85">
