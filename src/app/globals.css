@@ -21,6 +21,7 @@
   --animate-word-in: word-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-preloader-letter: preloader-letter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-preloader-dot: preloader-dot 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-page-in: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes spin-slow {
@@ -65,9 +66,39 @@
   }
 }
 
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Applied by ScrollReveal via JS, so content is untouched without JS. */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .preloader {
     display: none;
+  }
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
