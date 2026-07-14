@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Nav from "@/components/Nav";
 import PageTransition from "@/components/PageTransition";
 import Preloader from "@/components/Preloader";
@@ -30,6 +31,7 @@ export default function RootLayout({
         <PageTransition />
         <Nav />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
