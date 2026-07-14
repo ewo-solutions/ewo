@@ -81,9 +81,9 @@ export const team: readonly {
   role: string;
   photo: string | null;
 }[] = [
-  { name: "Emile Opperman", role: "Founder & Director", photo: null },
-  { name: "Lourens Vorster", role: "Director", photo: null },
-  { name: "Tarien Kirby", role: "Project Manager", photo: null },
-  { name: "Marleine Louw", role: "Graphic Designer", photo: null },
+  { name: "Emile Opperman", role: "Founder & Director", photo: "emile-opperman.jpg" },
+  { name: "Lourens Vorster", role: "Director", photo: "lourens-vorster.jpg" },
+  { name: "Tarien Kirby", role: "Project Manager", photo: "tarien-kirby.jpg" },
+  { name: "Marleine Louw", role: "Graphic Designer", photo: "marleine-louw.jpg" },
   { name: "Sage", role: "Website Developer", photo: null },
 ];
