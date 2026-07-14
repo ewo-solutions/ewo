@@ -4,8 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import SectionEyebrow from "@/components/SectionEyebrow";
 
-/** Newsletter panel shared by Home and Services. No backend yet — wire the
-    submit to an email/CRM provider in production. */
+/** Newsletter panel shared by Home and Services. Signups are emailed to the
+    agency inbox via /api/enquiry. */
 export default function Newsletter({
   eyebrowColor = "lilac",
 }: {
@@ -13,6 +13,35 @@ export default function Newsletter({
 }) {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  const subscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "newsletter", email }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Signup failed");
+      }
+      setSubscribed(true);
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message !== "Failed to fetch"
+          ? err.message
+          : "Signup failed, please try again",
+      );
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <section className="mx-auto max-w-[1848px] px-9">
@@ -37,13 +66,7 @@ export default function Newsletter({
               You&rsquo;re in — insider tips are on their way. ✦
             </p>
           ) : (
-            <form
-              className="mx-auto flex max-w-[640px] justify-center"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubscribed(true);
-              }}
-            >
+            <form className="mx-auto flex max-w-[640px] justify-center" onSubmit={subscribe}>
               <input
                 required
                 type="email"
@@ -54,11 +77,17 @@ export default function Newsletter({
               />
               <button
                 type="submit"
-                className="pill-b cursor-pointer rounded-r-full bg-lime px-9 py-[18px] text-[17px] font-medium text-ink"
+                disabled={sending}
+                className="pill-b cursor-pointer rounded-r-full bg-lime px-9 py-[18px] text-[17px] font-medium text-ink disabled:cursor-wait disabled:opacity-70"
               >
-                Subscribe.
+                {sending ? "…" : "Subscribe."}
               </button>
             </form>
+          )}
+          {error && !subscribed && (
+            <p className="mt-4 text-[15px] font-medium text-lime" role="alert">
+              {error}
+            </p>
           )}
         </div>
       </div>

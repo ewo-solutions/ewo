@@ -36,10 +36,21 @@ npm run lint
 Zero-config Vercel: import the GitHub repo at [vercel.com/new](https://vercel.com/new),
 framework preset "Next.js", no environment variables required.
 
+## Forms / email setup
+
+The contact wizard and newsletter POST to `/api/enquiry`, which sends via
+[Resend](https://resend.com). Environment variables (Vercel → Project →
+Settings → Environment Variables):
+
+- `RESEND_API_KEY` — required; forms return a friendly error until set
+- `ENQUIRY_TO` — recipient inbox (default `info@ewosolutions.com`)
+- `ENQUIRY_FROM` — verified sender; until the domain is verified in Resend,
+  the default `onboarding@resend.dev` sandbox sender only delivers to the
+  Resend account owner's own address
+
 ## Production TODOs
 
-- Wire newsletter + contact forms to an email/CRM provider (Resend, HubSpot, …) —
-  currently client-state only, per the design handoff.
-- Replace team and case-study `PlaceholderImage` slots with real photography.
+- Replace case-study `PlaceholderImage` slots with real photography/logos.
 - Swap Space Grotesk for licensed Blauer Nue.
+- Verify or replace the placeholder stats on the service detail pages.
 - Point ewosolutions.com DNS at Vercel after import.

@@ -22,13 +22,46 @@ export default function ContactWizard() {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState(""); // honeypot
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  const next = () => {
-    if (step === 4) {
-      if (name && email) setDone(true);
-    } else {
+  const next = async () => {
+    if (step < 4) {
       setStep((s) => s + 1);
+      return;
+    }
+    if (!name || !email || sending) return;
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "contact",
+          name,
+          email,
+          services,
+          budget,
+          message,
+          company,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Sending failed");
+      }
+      setDone(true);
+    } catch (e) {
+      setError(
+        e instanceof Error && e.message !== "Failed to fetch"
+          ? e.message
+          : "Sending failed, please try again",
+      );
+    } finally {
+      setSending(false);
     }
   };
 
@@ -124,6 +157,24 @@ export default function ContactWizard() {
                   placeholder="you@company.com"
                   className="rounded-full border-[1.5px] border-ink px-7 py-5 text-lg outline-none focus:border-violet"
                 />
+                <input
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                  className="absolute -left-[9999px]"
+                />
+                {error && (
+                  <p className="text-[15px] font-medium text-violet" role="alert">
+                    {error} — or email us directly at{" "}
+                    <a href="mailto:info@ewosolutions.com" className="underline">
+                      info@ewosolutions.com
+                    </a>
+                  </p>
+                )}
               </div>
             </>
           )}
@@ -156,9 +207,10 @@ export default function ContactWizard() {
               </button>
               <button
                 onClick={next}
-                className="pill-a inline-flex cursor-pointer items-center gap-3.5 rounded-full bg-ink py-2 pl-7 pr-2 text-base font-medium text-lime transition-all duration-250 hover:-translate-y-[3px] hover:shadow-[0_14px_30px_rgba(27,26,51,.25)]"
+                disabled={sending}
+                className="pill-a inline-flex cursor-pointer items-center gap-3.5 rounded-full bg-ink py-2 pl-7 pr-2 text-base font-medium text-lime transition-all duration-250 hover:-translate-y-[3px] hover:shadow-[0_14px_30px_rgba(27,26,51,.25)] disabled:cursor-wait disabled:opacity-70"
               >
-                {step === 4 ? "Send enquiry" : "Next"}
+                {step === 4 ? (sending ? "Sending…" : "Send enquiry") : "Next"}
                 <span className="pill-circle inline-flex size-[38px] items-center justify-center rounded-full bg-lime text-ink transition-all duration-250">
                   ↗
                 </span>
