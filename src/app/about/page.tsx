@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Carousel from "@/components/Carousel";
 import CountUp from "@/components/CountUp";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
@@ -7,14 +9,14 @@ import PillButton from "@/components/PillButton";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import SectionEyebrow from "@/components/SectionEyebrow";
 import Wordmark from "@/components/Wordmark";
+import PrinciplesScroller from "@/features/about/PrinciplesScroller";
 import { tagline } from "@/data/site";
 import {
   aboutOverview,
   aboutStats,
-  principles,
   team,
   teamPanel,
-  whereWeAre,
+  whoWeAreCards,
 } from "@/data/team";
 
 export const metadata: Metadata = { title: "About" };
@@ -54,23 +56,19 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-[1426px] px-9 pt-5 pb-[100px]">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] gap-[72px]">
-          <div>
-            <SectionEyebrow>
-              {whereWeAre.eyebrow} <span className="text-lime">→</span>
-            </SectionEyebrow>
-            <h3 className="text-[clamp(30px,3vw,46px)] font-normal leading-[1.15]">
-              {whereWeAre.heading}
-            </h3>
-          </div>
-          <div className="text-base leading-[1.75] text-ink/80">
-            {whereWeAre.paragraphs.map((p) => (
-              <p key={p.slice(0, 24)} className="mb-5 last:mb-0">
-                {p}
-              </p>
-            ))}
-          </div>
-        </div>
+        <SectionEyebrow>
+          Get to know us <span className="text-lime">→</span>
+        </SectionEyebrow>
+        <Carousel autoMs={5000} ariaLabel="About EWO" itemClassName="w-[85%] sm:w-[480px]">
+          {whoWeAreCards.map(({ heading, body }) => (
+            <div key={heading} className="flex h-full flex-col rounded-card bg-lilac/15 p-8 md:p-10">
+              <h3 className="mb-4 text-[clamp(26px,2.6vw,38px)] font-normal leading-[1.15]">
+                {heading}
+              </h3>
+              <p className="text-base leading-[1.75] text-ink/80">{body}</p>
+            </div>
+          ))}
+        </Carousel>
       </section>
 
       <section className="mx-auto max-w-[1426px] px-9 pb-[110px]">
@@ -90,19 +88,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1100px] px-9 pb-[130px]">
-        {principles.map(({ label, name, desc }) => (
-          <div
-            key={label}
-            className="grid grid-cols-1 gap-4 border-t border-lilac/50 py-[34px] md:grid-cols-[220px_1fr] md:gap-12"
-          >
-            <strong className="text-[17px]">{label}</strong>
-            <p className="text-base leading-[1.7] text-ink/80">
-              <strong>{name}:</strong> {desc}
-            </p>
-          </div>
-        ))}
-      </section>
+      <PrinciplesScroller />
 
       <section className="mx-auto max-w-[1848px] px-9">
         <div className="rounded-panel bg-ink px-[8%] py-[100px] text-white">
@@ -118,13 +104,22 @@ export default function AboutPage() {
             className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-6"
             data-stagger
           >
-            {team.map(({ name, role }) => (
+            {team.map(({ name, role, photo }) => (
               <div
                 key={name}
                 className="relative aspect-[1/1.05] overflow-hidden rounded-frame bg-ink-secondary"
               >
-                {/* TODO: replace with real photo via next/image */}
-                <PlaceholderImage label={name} className="absolute inset-0" />
+                {photo ? (
+                  <Image
+                    src={`/images/team/${photo}`}
+                    alt={name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 400px"
+                  />
+                ) : (
+                  <PlaceholderImage label={name} className="absolute inset-0" />
+                )}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-b from-transparent to-ink/90 px-6 pt-[60px] pb-5">
                   <strong className="flex items-center gap-2.5 text-lg">
                     <span className="size-2 rounded-full bg-lime" />

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Carousel from "@/components/Carousel";
 import CountUp from "@/components/CountUp";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
@@ -14,10 +15,10 @@ import {
   caseStudiesPanel,
   philosophy,
   reviews,
-  serviceCols,
   stats,
   whatWeDo,
 } from "@/data/home";
+import { serviceDetails } from "@/data/serviceDetails";
 import { tagline } from "@/data/site";
 
 export default function HomePage() {
@@ -32,11 +33,11 @@ export default function HomePage() {
         </h1>
         <div className="max-w-[400px] pt-6 text-right">
           <p className="text-[clamp(20px,1.8vw,28px)] leading-[1.25] tracking-[.05em]">
-            <strong>{tagline.strong}</strong>
+            <strong className="text-lilac">{tagline.strong}</strong>
             <br />
             {tagline.rest}
           </p>
-          <p className="mt-[18px] text-sm font-semibold text-lime">
+          <p className="mt-[18px] text-sm font-semibold text-lilac">
             <span className="mr-3 inline-block h-px w-[120px] bg-lilac align-middle" />
             {tagline.since}
           </p>
@@ -56,7 +57,7 @@ export default function HomePage() {
 
       {/* PHILOSOPHY PANEL */}
       <section className="mx-auto max-w-[1848px] px-9">
-        <div className="relative grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] items-center gap-16 overflow-hidden rounded-panel bg-lilac px-[8%] py-[120px]">
+        <div className="relative grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] items-center gap-10 overflow-hidden rounded-panel bg-lilac px-[8%] py-14 md:gap-16 md:py-[120px]">
           <RotatingTextBadge
             text="ABOUT US · ABOUT US · ABOUT US · ABOUT US ·"
             className="absolute left-[6%] top-1/2 -mt-[210px] size-[420px] opacity-[.22]"
@@ -65,12 +66,12 @@ export default function HomePage() {
             <p className="mb-[18px] text-base font-bold uppercase tracking-[.1em] text-white">
               {philosophy.eyebrow}
             </p>
-            <h2 className="text-[clamp(40px,4.5vw,70px)] font-normal leading-none tracking-[.05em] text-white">
+            <h2 className="text-[clamp(40px,4.5vw,70px)] font-normal leading-none tracking-[.05em] text-ink">
               {philosophy.heading}
             </h2>
           </div>
           <div className="relative">
-            <p className="mb-9 text-[17px] leading-[1.65] text-white/92">
+            <p className="mb-9 text-[17px] leading-[1.65] text-ink/85">
               {philosophy.body}
             </p>
             <div className="flex flex-wrap gap-4">
@@ -103,8 +104,8 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col gap-11" data-stagger>
               {stats.map(({ value, label }) => (
-                <div key={label} className="flex items-baseline gap-7">
-                  <span className="min-w-[220px] text-[clamp(60px,6vw,96px)] font-bold leading-none text-lilac">
+                <div key={label} className="flex items-baseline gap-4 md:gap-7">
+                  <span className="min-w-0 text-[clamp(60px,6vw,96px)] font-bold leading-none text-lilac md:min-w-[220px]">
                     <CountUp value={value} />
                   </span>
                   <span className="border-b-2 border-lime pb-1.5 text-base font-medium">
@@ -120,8 +121,9 @@ export default function HomePage() {
               alt="EWO team at work"
               width={2400}
               height={1600}
+              quality={90}
               className="parallax-img size-full object-cover"
-              sizes="(max-width: 1024px) 100vw, 640px"
+              sizes="(max-width: 1024px) 100vw, 800px"
             />
           </div>
         </div>
@@ -129,32 +131,30 @@ export default function HomePage() {
 
       <Divider className="mx-auto max-w-[1426px] px-9" />
 
-      {/* SERVICES SPLIT */}
+      {/* SERVICES CAROUSEL */}
       <section className="mx-auto max-w-[1426px] px-9 py-[110px]">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] gap-16">
-          {serviceCols.map(({ name, desc, style }) => (
-            <div key={name}>
+        <Carousel autoMs={4500} ariaLabel="Our services" itemClassName="w-[85%] sm:w-[420px]">
+          {serviceDetails.map(({ name, desc, slug }) => (
+            <div key={slug} className="flex h-full flex-col">
               <SectionEyebrow color="lime">Services</SectionEyebrow>
               <h3 className="mb-[18px] text-[clamp(30px,3vw,44px)] font-medium tracking-[-.5px]">
                 {name}
               </h3>
-              <p className="mb-[30px] text-base leading-[1.65] text-ink/75">{desc}</p>
-              <PillButton
-                href="/services"
-                rest={style === "lime" ? "lime" : "dark"}
-                hover={style === "lime" ? "dark" : "lime"}
-              >
-                Our services
-              </PillButton>
+              <p className="mb-[30px] flex-1 text-base leading-[1.65] text-ink/75">{desc}</p>
+              <div>
+                <PillButton href={`/services/${slug}`} rest="dark" hover="lime">
+                  Learn more
+                </PillButton>
+              </div>
             </div>
           ))}
-        </div>
+        </Carousel>
       </section>
 
       {/* CASE STUDIES */}
       <section className="mx-auto max-w-[1848px] px-9">
-        <div className="rounded-panel bg-ink px-[8%] py-[100px] text-white">
-          <div className="mb-16 grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] items-end gap-16">
+        <div className="rounded-panel bg-ink px-[8%] py-14 text-white md:py-[100px]">
+          <div className="mb-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] items-end gap-6 md:mb-16 md:gap-16">
             <div>
               <SectionEyebrow color="lime">{caseStudiesPanel.eyebrow}</SectionEyebrow>
               <h2 className="text-[clamp(40px,4.5vw,70px)] font-normal leading-none tracking-[.05em]">
@@ -192,12 +192,9 @@ export default function HomePage() {
       {/* TESTIMONIALS */}
       <section className="mx-auto max-w-[1426px] px-9 pb-[130px]">
         <Divider className="mb-[72px]" />
-        <div
-          className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] gap-20"
-          data-stagger
-        >
+        <Carousel autoMs={5000} ariaLabel="Client testimonials" itemClassName="w-[88%] sm:w-[560px]">
           {reviews.map(({ quote, name, role }) => (
-            <figure key={name} className="m-0">
+            <figure key={name} className="m-0 rounded-card bg-lilac/15 p-8 md:p-10">
               <blockquote className="mb-7 text-[17px] leading-[1.7] text-ink/85">
                 {quote}
               </blockquote>
@@ -209,7 +206,7 @@ export default function HomePage() {
               </figcaption>
             </figure>
           ))}
-        </div>
+        </Carousel>
       </section>
 
       <Newsletter />

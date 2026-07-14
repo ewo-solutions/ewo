@@ -19,7 +19,6 @@ export const socials = [
 ] as const;
 
 export const footer = {
-  heading: ["We are a", "digital agency"],
   blurb:
     "We offer bespoke digital solutions for clients across various industries. Talk to us to get your brand thriving online.",
   copyright: "© 2026 EWO Solutions (PTY) Ltd. All rights reserved.",

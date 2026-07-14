@@ -17,11 +17,11 @@ export default function PageHero({
       </h1>
       <div className="max-w-[400px] pt-6 text-right">
         <p className="text-[clamp(20px,1.8vw,28px)] leading-[1.25]">
-          <strong>{tagline}</strong>
+          <strong className="text-lilac">{tagline}</strong>
           <br />
           {taglineRest}
         </p>
-        <p className="mt-[18px] text-sm font-semibold text-lime">
+        <p className="mt-[18px] text-sm font-semibold text-lilac">
           <span className="mr-3 inline-block h-px w-[120px] bg-lilac align-middle" />
           {kicker}
         </p>

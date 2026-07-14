@@ -30,9 +30,9 @@ export default function Footer({
     <footer className="mx-auto max-w-[1426px] px-9 pt-[110px] pb-14">
       <div className="mb-20 grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-16">
         <h2 className="text-[clamp(40px,4.5vw,68px)] font-normal leading-[1.1]">
-          {footer.heading[0]}
+          We are a
           <br />
-          {footer.heading[1]}
+          <span className="text-lilac">digital</span> agency
         </h2>
         <p className="max-w-[380px] self-end text-base leading-[1.7] text-ink/70">
           {footer.blurb}

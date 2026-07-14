@@ -13,11 +13,11 @@ export default function ProcessStepper() {
     <section className="mx-auto max-w-[1426px] px-9 py-[130px]">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,480px),1fr))] items-start gap-[72px]">
         <div className="border-l-[5px] border-lilac pl-8 md:pl-14">
-          <div className="mb-9 flex items-center gap-6">
+          <SectionEyebrow color="lime">Our Process</SectionEyebrow>
+          <div className="mb-9">
             <span className="text-[clamp(80px,8vw,130px)] font-bold leading-none text-ink/15">
               {cur.label}
             </span>
-            <SectionEyebrow color="lime">Our Process</SectionEyebrow>
           </div>
           <h3 className="mb-[18px] text-[clamp(26px,2.6vw,38px)] font-medium">
             {cur.name}
@@ -40,12 +40,13 @@ export default function ProcessStepper() {
             ))}
           </div>
         </div>
-        <div className="aspect-[2/3] w-full overflow-hidden rounded-card">
+        <div className="aspect-square w-full overflow-hidden rounded-card">
           <Image
             src="/images/process-photo.jpg"
             alt="Our process"
             width={1400}
             height={1400}
+            quality={90}
             className="parallax-img size-full object-cover"
             sizes="(max-width: 1024px) 100vw, 640px"
           />

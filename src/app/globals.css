@@ -144,6 +144,15 @@
   }
 }
 
+/* Hide horizontal scrollbars on carousel tracks (still scrollable). */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* Marquee strip */
 .marquee-track {
   animation: marquee 30s linear infinite;

@@ -27,19 +27,6 @@ export const stats = [
   { value: "9+", label: "Digital artisans." },
 ] as const;
 
-export const serviceCols = [
-  {
-    name: "Development",
-    desc: "Our development team brings your vision to life with precision and innovation, creating websites and applications that are as powerful as they are user-friendly. From e-commerce platforms to custom applications, we build solutions that grow with your business.",
-    style: "lime",
-  },
-  {
-    name: "Design",
-    desc: "Our design team transforms ideas into striking visuals that elevate your brand and engage your audience. Every element we create is crafted with purpose and precision — designs that tell your brand's story in a way that resonates.",
-    style: "dark",
-  },
-] as const;
-
 export const caseStudiesPanel = {
   eyebrow: "Case studies",
   heading: "View our previous work.",

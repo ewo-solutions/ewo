@@ -4,14 +4,24 @@ export const aboutOverview = {
   col2: "Fast-forward to today: EWO Solutions keeps seeing year-on-year growth. Lourens Vorster joined EWO Solutions as a director, further fueling the talent and capabilities of the team.",
 };
 
-export const whereWeAre = {
-  eyebrow: "Where we are",
-  heading: "Based in Cape Town, working globally",
-  paragraphs: [
-    "Thanks to the nature of our services, we can work with clients no matter where they are located in the world. EWO Solutions boasts an impressive list of clients locally, and a growing client base in other parts of the world — the United States, the United Kingdom and the European Union.",
-    "We typically encourage clients to book a 45-minute consultation with us so that we can determine exactly what the project requirements are. From there, we deliver a bespoke proposal for the client to consider.",
-  ],
-};
+export const whoWeAreCards = [
+  {
+    heading: "Where we are",
+    body: "Based in Cape Town, working globally. Thanks to the nature of our services, we can work with clients no matter where they are located in the world. EWO Solutions boasts an impressive list of clients locally, and a growing client base in other parts of the world — the United States, the United Kingdom and the European Union.",
+  },
+  {
+    heading: "Who we are",
+    body: "EWO is a boutique digital agency built for brands that demand more than the ordinary. We're a team of strategists, creatives, and technologists who believe in precision, performance, and partnership. We work with high-value clients who want their digital presence to reflect their ambition.",
+  },
+  {
+    heading: "What we do",
+    body: "We craft data-driven digital marketing strategies, build high-performing websites, and manage compelling social media campaigns — all tailored to the unique needs of each client. From strategy to execution, we don't just follow best practices — we create them.",
+  },
+  {
+    heading: "Why we do it",
+    body: "Because we believe great businesses deserve great digital experiences. We exist to help our clients lead in their industries by creating work that drives results, inspires trust, and sets new standards. When our clients win, so do we.",
+  },
+] as const;
 
 export const aboutStats = [
   { value: "35+", label: "Combined years of experience." },
@@ -64,14 +74,16 @@ export const teamPanel = {
   col2: "We typically encourage clients to book a 45-minute consultation with us so that we can determine exactly what the project requirements are. From there, we deliver a bespoke proposal for the client to consider.",
 };
 
-export const team = [
-  { name: "Emile Opperman", role: "Founder & Director" },
-  { name: "Lourens Vorster", role: "Director" },
-  { name: "Anso Muller", role: "Project Manager" },
-  { name: "Daniel Scott", role: "Lead Graphic Designer" },
-  { name: "Tarien Basson", role: "Senior Graphic Designer" },
-  { name: "Karli Coetzee", role: "Junior Graphic Designer" },
-  { name: "Jean Mulder", role: "Copywriter" },
-  { name: "David Mutero", role: "Senior Web Developer" },
-  { name: "Robert Tetteh", role: "Junior Web Developer" },
-] as const;
+// photo: filename under public/images/team/, or null while awaiting the
+// real photograph (renders a styled placeholder).
+export const team: readonly {
+  name: string;
+  role: string;
+  photo: string | null;
+}[] = [
+  { name: "Emile Opperman", role: "Founder & Director", photo: null },
+  { name: "Lourens Vorster", role: "Director", photo: null },
+  { name: "Tarien Kirby", role: "Project Manager", photo: null },
+  { name: "Marleine Louw", role: "Graphic Designer", photo: null },
+  { name: "Sage", role: "Website Developer", photo: null },
+];
