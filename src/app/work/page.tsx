@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -6,7 +7,12 @@ import PillButton from "@/components/PillButton";
 import Wordmark from "@/components/Wordmark";
 import WorkFilter from "@/features/work/WorkFilter";
 
-export const metadata: Metadata = { title: "Work" };
+export const metadata: Metadata = pageMetadata({
+  title: "Work",
+  description:
+    "See EWO Solutions' work — case studies across platform builds, e-commerce, campaigns and lead generation for brands in South Africa and beyond.",
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (

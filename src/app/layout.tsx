@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/Nav";
 import PageTransition from "@/components/PageTransition";
 import Preloader from "@/components/Preloader";
+import { ogImage, siteConfig, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
 // Blauer Nue — the licensed brand typeface (replaces the Space Grotesk stand-in).
@@ -26,20 +27,88 @@ const blauerNue = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "EWO Solutions — Digital Marketing Agency",
+    default: "EWO Solutions — Digital Marketing Agency in Cape Town",
     template: "%s — EWO Solutions",
   },
-  description:
-    "Turning vision into reality — our digital artisans fuel your brand's growth online. Digital marketing agency in Somerset West, Cape Town.",
+  description: siteConfig.shortDescription,
+  applicationName: siteConfig.name,
+  keywords: [
+    "digital marketing agency",
+    "Cape Town",
+    "Somerset West",
+    "web development",
+    "PPC advertising",
+    "social media marketing",
+    "content creation",
+    "graphic design",
+    "SEO",
+    "EWO Solutions",
+  ],
+  authors: [{ name: siteConfig.name, url: siteUrl }],
+  creator: siteConfig.name,
+  publisher: siteConfig.legalName,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_ZA",
+    url: siteUrl,
+    siteName: siteConfig.name,
+    title: "EWO Solutions — Digital Marketing Agency in Cape Town",
+    description: siteConfig.shortDescription,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EWO Solutions — Digital Marketing Agency in Cape Town",
+    description: siteConfig.shortDescription,
+    images: [ogImage.url],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  category: "Marketing",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${siteUrl}/#organization`,
+    name: siteConfig.name,
+    legalName: siteConfig.legalName,
+    url: siteUrl,
+    email: siteConfig.email,
+    telephone: siteConfig.phone,
+    foundingDate: siteConfig.founded,
+    description: siteConfig.shortDescription,
+    image: `${siteUrl}/opengraph-image.png`,
+    logo: `${siteUrl}/ewo-logo.svg`,
+    priceRange: "$$",
+    areaServed: ["ZA", "GB", "US", "EU"],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.streetAddress,
+      addressLocality: siteConfig.locality,
+      addressRegion: siteConfig.region,
+      postalCode: siteConfig.postalCode,
+      addressCountry: siteConfig.country,
+    },
+    sameAs: [siteConfig.linkedin],
+  };
+
   return (
-    <html lang="en" className={blauerNue.variable}>
+    <html lang="en-ZA" className={blauerNue.variable}>
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Preloader />
         <PageTransition />
         <Nav />

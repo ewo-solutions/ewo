@@ -20,6 +20,15 @@ import {
 } from "@/data/home";
 import { serviceDetails } from "@/data/serviceDetails";
 import { tagline } from "@/data/site";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "EWO Solutions — Digital Marketing Agency in Cape Town",
+  description:
+    "EWO Solutions turns vision into reality — a digital marketing agency in Somerset West, Cape Town delivering web development, PPC, social media, content and design that grow your brand online.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HomePage() {
   return (

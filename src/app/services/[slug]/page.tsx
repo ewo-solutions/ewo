@@ -6,6 +6,7 @@ import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
 import PillButton from "@/components/PillButton";
 import { darkPanelSlugs, servicePages } from "@/data/servicePages";
+import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return servicePages.map(({ slug }) => ({ slug }));
@@ -18,7 +19,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const service = servicePages.find((s) => s.slug === slug);
-  return { title: service?.eyebrow ?? "Services" };
+  if (!service) return { title: "Services" };
+  return pageMetadata({
+    title: service.eyebrow,
+    description: `${service.tagline}. ${service.introHeading} EWO Solutions, a digital marketing agency in Cape Town.`,
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({

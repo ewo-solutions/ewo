@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Carousel from "@/components/Carousel";
 import CountUp from "@/components/CountUp";
@@ -19,7 +20,12 @@ import {
   whoWeAreCards,
 } from "@/data/team";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata: Metadata = pageMetadata({
+  title: "About",
+  description:
+    "Meet EWO Solutions — a boutique digital agency in Cape Town working with high-value clients locally and globally since 2019. Our story, principles and team.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
 import Newsletter from "@/components/Newsletter";
@@ -10,7 +11,12 @@ import ServiceAccordion from "@/features/services/ServiceAccordion";
 import { servicesIntro } from "@/data/services";
 import { tagline } from "@/data/site";
 
-export const metadata: Metadata = { title: "Services" };
+export const metadata: Metadata = pageMetadata({
+  title: "Services",
+  description:
+    "Full-scale digital marketing services from EWO Solutions: website development, pay-per-click advertising, social media, content creation, graphic design, email marketing and more.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
