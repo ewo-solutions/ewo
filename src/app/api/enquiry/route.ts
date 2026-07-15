@@ -56,7 +56,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const to = process.env.ENQUIRY_TO || "info@ewosolutions.com";
+  // Comma-separated list; defaults to both directors.
+  const to = (
+    process.env.ENQUIRY_TO || "emile@ewosolutions.com,lourens@ewosolutions.com"
+  )
+    .split(",")
+    .map((addr) => addr.trim())
+    .filter(Boolean);
   const from = process.env.ENQUIRY_FROM || "EWO Website <onboarding@resend.dev>";
 
   let subject: string;
@@ -89,7 +95,7 @@ export async function POST(request: Request) {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ from, to: [to], reply_to: email, subject, text }),
+    body: JSON.stringify({ from, to, reply_to: email, subject, text }),
   });
 
   if (!res.ok) {

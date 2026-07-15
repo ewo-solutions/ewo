@@ -4,6 +4,25 @@ import { useState } from "react";
 
 const serviceLabels = ["Website", "Content", "Advertising", "Branding", "Social Media"];
 
+const industries = [
+  "Agriculture",
+  "Automotive",
+  "Construction & Property",
+  "Education",
+  "Finance & Insurance",
+  "Food & Beverage",
+  "Health & Medical",
+  "Hospitality & Tourism",
+  "Legal & Professional Services",
+  "Manufacturing",
+  "Media & Entertainment",
+  "Non-Profit",
+  "Retail & E-commerce",
+  "Technology & Software",
+  "Transport & Logistics",
+  "Other",
+];
+
 const chipCls = (on: boolean) =>
   `cursor-pointer rounded-full border-[1.5px] border-ink px-11 py-5 text-[clamp(18px,1.6vw,24px)] transition-all duration-250 hover:-translate-y-[3px] hover:shadow-[0_14px_30px_rgba(27,26,51,.25)] ${
     on ? "bg-ink text-lime" : "bg-transparent text-ink"
@@ -117,12 +136,26 @@ export default function ContactWizard() {
                   placeholder="Company name"
                   className="rounded-full border-[1.5px] border-ink px-7 py-5 text-lg outline-none focus:border-violet"
                 />
-                <input
+                <select
                   value={industry}
                   onChange={(e) => setIndustry(e.target.value)}
-                  placeholder="Industry or sector"
-                  className="rounded-full border-[1.5px] border-ink px-7 py-5 text-lg outline-none focus:border-violet"
-                />
+                  className={`cursor-pointer appearance-none rounded-full border-[1.5px] border-ink bg-[length:20px] bg-[right_28px_center] bg-no-repeat px-7 py-5 text-lg outline-none focus:border-violet ${
+                    industry ? "text-ink" : "text-ink/45"
+                  }`}
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231B1A33' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+                  }}
+                >
+                  <option value="" disabled>
+                    Select your industry
+                  </option>
+                  {industries.map((i) => (
+                    <option key={i} value={i} className="text-ink">
+                      {i}
+                    </option>
+                  ))}
+                </select>
               </div>
             </>
           )}
