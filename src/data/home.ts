@@ -31,7 +31,12 @@ export const caseStudiesPanel = {
   eyebrow: "Case studies",
   heading: "View our previous work.",
   body: "Real results, real stories — see how we've transformed brands just like yours.",
-  tiles: ["VetsBrands", "beautific", "focal", "blueprint society."],
+  tiles: [
+    { name: "VetsBrands", logo: "vetsbrands.png" },
+    { name: "beautific", logo: "beautific.png" },
+    { name: "focal", logo: "focal.png" },
+    { name: "blueprint society.", logo: "blueprint-society.png" },
+  ],
 };
 
 export const processSteps = [

@@ -15,7 +15,7 @@
   --radius-folder: 16px;
   --radius-nav: 12px;
 
-  --font-sans: var(--font-space-grotesk), sans-serif;
+  --font-sans: var(--font-blauer-nue), sans-serif;
 
   --animate-spin-slow: spin-slow 40s linear infinite;
   --animate-word-in: word-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;

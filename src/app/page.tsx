@@ -176,11 +176,18 @@ export default function HomePage() {
           >
             {caseStudiesPanel.tiles.map((tile) => (
               <Link
-                key={tile}
+                key={tile.name}
                 href="/work"
-                className="flex aspect-[1.23/1] items-center justify-center rounded-card bg-lilac text-[clamp(18px,1.6vw,26px)] font-semibold tracking-[.05em] text-white/85 transition-colors hover:bg-lime hover:text-ink"
+                aria-label={tile.name}
+                className="group flex aspect-[1.23/1] items-center justify-center rounded-card border-2 border-transparent bg-ink-secondary px-[14%] transition-all duration-300 hover:-translate-y-1 hover:border-lime"
               >
-                {tile}
+                <Image
+                  src={`/images/clients/${tile.logo}`}
+                  alt={tile.name}
+                  width={440}
+                  height={110}
+                  className="max-h-[52px] w-full object-contain opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                />
               </Link>
             ))}
           </div>
