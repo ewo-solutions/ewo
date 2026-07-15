@@ -7,8 +7,8 @@ export const navLinks = [
 ] as const;
 
 export const contact = {
-  phones: ["098 746 2236", "048 598 7759"],
-  email: "info@ewosolutions.co.za",
+  phones: ["+27 61 528 4908"],
+  email: "info@ewosolutions.com",
   address: "Paardevlei, 11 Gardner Williams Ave, Somerset West, Cape Town, 7130",
 };
 

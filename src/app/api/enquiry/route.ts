@@ -17,7 +17,8 @@ interface EnquiryBody {
   name?: string;
   email?: string;
   services?: string[];
-  budget?: string;
+  companyName?: string;
+  industry?: string;
   message?: string;
   company?: string; // honeypot — real visitors never fill this
 }
@@ -73,8 +74,9 @@ export async function POST(request: Request) {
       "",
       `Name: ${name}`,
       `Email: ${email}`,
+      `Company: ${clean(body.companyName) || "—"}`,
+      `Industry: ${clean(body.industry) || "—"}`,
       `Services: ${services.length ? services.join(", ") : "—"}`,
-      `Budget: ${clean(body.budget) || "—"}`,
       "",
       "Project details:",
       clean(body.message, MAX_LEN) || "—",

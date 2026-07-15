@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 const serviceLabels = ["Website", "Content", "Advertising", "Branding", "Social Media"];
-const budgetLabels = ["Under R25k", "R25k – R75k", "R75k – R200k", "R200k+"];
 
 const chipCls = (on: boolean) =>
   `cursor-pointer rounded-full border-[1.5px] border-ink px-11 py-5 text-[clamp(18px,1.6vw,24px)] transition-all duration-250 hover:-translate-y-[3px] hover:shadow-[0_14px_30px_rgba(27,26,51,.25)] ${
@@ -18,11 +17,12 @@ const headingCls =
 export default function ContactWizard() {
   const [step, setStep] = useState(1);
   const [services, setServices] = useState<string[]>([]);
-  const [budget, setBudget] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [industry, setIndustry] = useState("");
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState(""); // honeypot
+  const [hp, setHp] = useState(""); // honeypot
   const [done, setDone] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -44,9 +44,10 @@ export default function ContactWizard() {
           name,
           email,
           services,
-          budget,
+          companyName,
+          industry,
           message,
-          company,
+          company: hp,
         }),
       });
       if (!res.ok) {
@@ -106,19 +107,22 @@ export default function ContactWizard() {
           )}
           {step === 2 && (
             <>
-              <h1 className={headingCls}>
-                What&rsquo;s your <strong>budget</strong> range?
+              <h1 className={`${headingCls} mb-[60px]`}>
+                Tell us about <strong>your company</strong>.
               </h1>
-              <div className="flex flex-wrap justify-center gap-5">
-                {budgetLabels.map((label) => (
-                  <button
-                    key={label}
-                    onClick={() => setBudget(label)}
-                    className={chipCls(budget === label)}
-                  >
-                    {label}
-                  </button>
-                ))}
+              <div className="flex w-full max-w-[520px] flex-col gap-5">
+                <input
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="Company name"
+                  className="rounded-full border-[1.5px] border-ink px-7 py-5 text-lg outline-none focus:border-violet"
+                />
+                <input
+                  value={industry}
+                  onChange={(e) => setIndustry(e.target.value)}
+                  placeholder="Industry or sector"
+                  className="rounded-full border-[1.5px] border-ink px-7 py-5 text-lg outline-none focus:border-violet"
+                />
               </div>
             </>
           )}
@@ -159,9 +163,9 @@ export default function ContactWizard() {
                 />
                 <input
                   type="text"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  name="company"
+                  value={hp}
+                  onChange={(e) => setHp(e.target.value)}
+                  name="website"
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden

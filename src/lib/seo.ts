@@ -24,7 +24,7 @@ export const siteConfig = {
   country: "ZA",
   postalCode: "7130",
   streetAddress: "Paardevlei, 11 Gardner Williams Ave",
-  phone: "+27 98 746 2236",
+  phone: "+27 61 528 4908",
   email: "info@ewosolutions.com",
   founded: "2019",
   linkedin: "https://www.linkedin.com/company/101436552/",
