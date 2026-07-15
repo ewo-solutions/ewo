@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import CountUp from "@/components/CountUp";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import { caseStudies, workFilters, type WorkFilterLabel } from "@/data/work";
@@ -43,12 +44,26 @@ export default function WorkFilter() {
               key={c.client}
               className="flex flex-col overflow-hidden rounded-card bg-lilac transition-all duration-250 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(27,26,51,.18)]"
             >
-              <div className="relative mx-5 mt-5 aspect-video overflow-hidden rounded-frame bg-white/35">
-                {/* TODO: replace with real case-study image via next/image */}
-                <PlaceholderImage
-                  label={c.client}
-                  className="absolute inset-0 bg-transparent text-ink/40"
-                />
+              <div
+                className={`relative mx-5 mt-5 aspect-video overflow-hidden rounded-frame ${
+                  c.logo ? "flex items-center justify-center bg-ink px-[12%]" : "bg-white/35"
+                }`}
+              >
+                {c.logo ? (
+                  <Image
+                    src={`/images/clients/${c.logo}`}
+                    alt={c.client}
+                    width={440}
+                    height={110}
+                    className="max-h-[64px] w-full object-contain"
+                  />
+                ) : (
+                  /* TODO: replace with real case-study image via next/image */
+                  <PlaceholderImage
+                    label={c.client}
+                    className="absolute inset-0 bg-transparent text-ink/40"
+                  />
+                )}
               </div>
               <div className="px-8 pt-[26px] pb-[30px]">
                 <div className="flex items-baseline justify-between gap-4">

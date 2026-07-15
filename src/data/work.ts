@@ -16,6 +16,7 @@ export interface CaseStudy {
   stat1label: string;
   stat2: string;
   stat2label: string;
+  logo?: string; // filename under public/images/clients/, when available
 }
 
 // Placeholder copy/stats from the design handoff — replace with real
@@ -23,6 +24,7 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     client: "VetsBrands",
+    logo: "vetsbrands.png",
     category: "Platform",
     summary:
       "Custom web platform and brand refresh for a national veterinary distributor.",
@@ -33,6 +35,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "beautific",
+    logo: "beautific.png",
     category: "E-commerce",
     summary:
       "E-commerce build plus always-on social and PPC for a growing beauty brand.",
@@ -43,6 +46,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "Focal Shipping",
+    logo: "focal.png",
     category: "Lead gen",
     summary:
       "SEO and PPC engine driving qualified logistics enquiries month after month.",
@@ -53,6 +57,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     client: "blueprint society.",
+    logo: "blueprint-society.png",
     category: "Campaign",
     summary:
       "Brand and content campaign building an engaged community from scratch.",
