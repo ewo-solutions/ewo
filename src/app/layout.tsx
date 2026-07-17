@@ -70,6 +70,12 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  // Google Search Console ownership verification. Set the token from GSC's
+  // "HTML tag" method in NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION (Vercel env var);
+  // when unset the meta tag is simply omitted.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   category: "Marketing",
 };
 
