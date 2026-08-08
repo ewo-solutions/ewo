@@ -60,7 +60,7 @@ export default function Nav() {
                 } ${i < navLinks.length - 1 ? "border-b border-lilac/40" : ""}`}
               >
                 {label}
-                {isContact && " →"}
+                {isContact && " →︎"}
               </Link>
             );
           })}

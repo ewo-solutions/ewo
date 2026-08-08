@@ -63,7 +63,7 @@ export default function Newsletter({
           </h2>
           {subscribed ? (
             <p className="text-[19px] text-lime">
-              You&rsquo;re in — insider tips are on their way. ✦
+              You&rsquo;re in — insider tips are on their way. ✦︎
             </p>
           ) : (
             <form className="mx-auto flex max-w-[640px] justify-center" onSubmit={subscribe}>

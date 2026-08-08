@@ -79,7 +79,7 @@ export default function PrinciplesScroller() {
           ))}
         </div>
         <p className="mt-4 text-center text-[13px] font-semibold uppercase tracking-[.12em] text-lilac">
-          Swipe to explore →
+          Swipe to explore →︎
         </p>
       </div>
     </section>

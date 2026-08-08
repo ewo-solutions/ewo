@@ -91,7 +91,7 @@ export default function HomePage() {
                 href="/services"
                 className="inline-flex items-center gap-2.5 border-b-[1.5px] border-ink pb-0.5 text-base font-medium text-ink transition-colors hover:border-white hover:text-white"
               >
-                Our services ↗
+                Our services ↗︎
               </Link>
             </div>
           </div>

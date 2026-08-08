@@ -240,7 +240,7 @@ export default function ContactWizard() {
                   step === 1 ? "invisible" : "visible"
                 }`}
               >
-                ← Back
+                ←︎ Back
               </button>
               <button
                 onClick={next}
@@ -249,7 +249,7 @@ export default function ContactWizard() {
               >
                 {step === 4 ? (sending ? "Sending…" : "Send enquiry") : "Next"}
                 <span className="pill-circle inline-flex size-[38px] items-center justify-center rounded-full bg-lime text-ink transition-all duration-250">
-                  ↗
+                  ↗︎
                 </span>
               </button>
             </div>

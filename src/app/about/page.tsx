@@ -63,7 +63,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1426px] px-9 pt-5 pb-[100px]">
         <SectionEyebrow>
-          Get to know us <span className="text-lime">→</span>
+          Get to know us <span className="text-lime">→︎</span>
         </SectionEyebrow>
         <Carousel autoMs={5000} ariaLabel="About EWO" itemClassName="w-[85%] sm:w-[480px]">
           {whoWeAreCards.map(({ heading, body }) => (

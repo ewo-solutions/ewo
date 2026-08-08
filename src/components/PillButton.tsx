@@ -41,7 +41,7 @@ export default function PillButton({
       <span
         className={`pill-circle ${s.circle} ${sizes.circle} inline-flex items-center justify-center rounded-full transition-all duration-250`}
       >
-        ↗
+        {"↗︎" /* text-presentation selector: keeps this flat on iOS instead of falling back to a color emoji glyph */}
       </span>
     </Link>
   );

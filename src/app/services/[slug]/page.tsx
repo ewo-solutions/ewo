@@ -47,7 +47,7 @@ export default async function ServiceDetailPage({
           <Link href="/services" className="text-lilac transition-colors hover:text-violet">
             Services
           </Link>{" "}
-          <span className="text-lime">→</span> {service.eyebrow}
+          <span className="text-lime">→︎</span> {service.eyebrow}
         </p>
         <div className="flex flex-wrap items-end justify-between gap-10">
           <h1 className="max-w-[900px] text-balance text-[clamp(52px,7.5vw,120px)] font-light leading-[1.02] tracking-[-2px]">
@@ -193,7 +193,7 @@ export default async function ServiceDetailPage({
                 href={`/services/${o.slug}`}
                 className="rounded-full border-[1.5px] border-white/35 px-[26px] py-3 text-[15.5px] font-medium text-white transition-colors duration-250 hover:border-lime hover:bg-lime hover:text-ink"
               >
-                {o.eyebrow} ↗
+                {o.eyebrow} ↗︎
               </Link>
             ))}
           </div>

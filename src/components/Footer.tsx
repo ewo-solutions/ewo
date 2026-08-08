@@ -20,7 +20,7 @@ export default function Footer({
         </span>
         <span>{contact.address}</span>
         <a href={socials[0].href} className={linkCls}>
-          LinkedIn ↗
+          LinkedIn ↗︎
         </a>
       </footer>
     );
