@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const serviceLabels = ["Website", "Content", "Advertising", "Branding", "Social Media"];
 
@@ -45,6 +45,10 @@ export default function ContactWizard() {
   const [done, setDone] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+  const renderedAt = useRef<number | null>(null); // anti-spam: time the wizard first mounted
+  useEffect(() => {
+    renderedAt.current = Date.now();
+  }, []);
 
   const next = async () => {
     if (step < 4) {
@@ -67,6 +71,7 @@ export default function ContactWizard() {
           industry,
           message,
           company: hp,
+          renderedAt: renderedAt.current,
         }),
       });
       if (!res.ok) {

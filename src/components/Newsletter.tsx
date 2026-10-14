@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SectionEyebrow from "@/components/SectionEyebrow";
 
@@ -12,9 +12,14 @@ export default function Newsletter({
   eyebrowColor?: "lilac" | "green";
 }) {
   const [email, setEmail] = useState("");
+  const [hp, setHp] = useState(""); // honeypot — real visitors never fill this
   const [subscribed, setSubscribed] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+  const renderedAt = useRef<number | null>(null); // anti-spam: time this form first mounted
+  useEffect(() => {
+    renderedAt.current = Date.now();
+  }, []);
 
   const subscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +30,12 @@ export default function Newsletter({
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "newsletter", email }),
+        body: JSON.stringify({
+          type: "newsletter",
+          email,
+          company: hp,
+          renderedAt: renderedAt.current,
+        }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -82,6 +92,16 @@ export default function Newsletter({
               >
                 {sending ? "…" : "Subscribe."}
               </button>
+              <input
+                type="text"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden
+                className="absolute -left-[9999px]"
+              />
             </form>
           )}
           {error && !subscribed && (

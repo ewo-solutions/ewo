@@ -21,7 +21,14 @@ interface EnquiryBody {
   industry?: string;
   message?: string;
   company?: string; // honeypot — real visitors never fill this
+  renderedAt?: number; // client Date.now() captured when the form first mounted
 }
+
+// Below this, a submission is almost certainly scripted — no human reads a
+// label and fills even one field this fast. Above the max, the number is
+// implausible (clock skew or a forged value) and treated the same as absent.
+const MIN_FILL_MS = 1500;
+const MAX_FILL_MS = 1000 * 60 * 60 * 2;
 
 const clean = (v: unknown, max = 200) =>
   typeof v === "string" ? v.slice(0, max).trim() : "";
@@ -36,6 +43,15 @@ export async function POST(request: Request) {
 
   // Honeypot: pretend success so bots don't learn they were caught.
   if (clean(body.company)) return NextResponse.json({ ok: true });
+
+  // Fill-time trap: reject submissions sent well before a human could have
+  // read the form, and anything missing the timing field entirely — a
+  // script posting straight to this endpoint without replaying the page's
+  // own client code won't know to send it. Same quiet "ok" as the honeypot.
+  const elapsed = Date.now() - Number(body.renderedAt);
+  if (!Number.isFinite(elapsed) || elapsed < MIN_FILL_MS || elapsed > MAX_FILL_MS) {
+    return NextResponse.json({ ok: true });
+  }
 
   const type = body.type === "newsletter" ? "newsletter" : "contact";
   const email = clean(body.email);
