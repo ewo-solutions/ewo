@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/Nav";
 import PageTransition from "@/components/PageTransition";
 import Preloader from "@/components/Preloader";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { ogImage, siteConfig, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
@@ -119,6 +120,7 @@ export default function RootLayout({
         <PageTransition />
         <Nav />
         {children}
+        <WhatsAppButton />
         <SpeedInsights />
         <Analytics />
       </body>
