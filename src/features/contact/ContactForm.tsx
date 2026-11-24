@@ -2,7 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const serviceLabels = ["Website", "Content", "Advertising", "Branding", "Social Media"];
+const serviceLabels = [
+  "Website",
+  "App Development",
+  "Content",
+  "Advertising",
+  "Branding",
+  "Social Media",
+  "Other",
+];
 
 const industries = [
   "Agriculture",
