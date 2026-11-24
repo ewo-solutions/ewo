@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
-import ContactWizard from "@/features/contact/ContactWizard";
+import ContactForm from "@/features/contact/ContactForm";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <ContactWizard />
+      <ContactForm />
       <Footer variant="slim" />
     </div>
   );

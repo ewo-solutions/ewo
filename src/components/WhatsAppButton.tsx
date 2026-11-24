@@ -1,12 +1,20 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { contact } from "@/data/site";
 
 const digits = contact.phones[0].replace(/\D/g, "");
-const waHref = `https://wa.me/${digits}`;
+const prefill = "Hi! I found you online and I'd like to connect regarding a project.";
+const waHref = `https://wa.me/${digits}?text=${encodeURIComponent(prefill)}`;
 
-/** Floating brand-lime WhatsApp launcher, present on every page. Pure link —
-    no client JS needed. The outer ring is a looping, reduced-motion-safe
-    pulse purely to draw the eye; it carries no meaning on its own. */
+/** Floating brand-lime WhatsApp launcher, present on every page except
+    Contact — that page is already the "get in touch" action, and its form
+    is long enough on mobile that a fixed corner button would otherwise
+    overlap whichever field happens to scroll into that corner. */
 export default function WhatsAppButton() {
+  const pathname = usePathname();
+  if (pathname === "/contact") return null;
+
   return (
     <a
       href={waHref}
